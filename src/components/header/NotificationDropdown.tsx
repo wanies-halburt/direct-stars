@@ -103,12 +103,12 @@ export default function NotificationDropdown() {
                   </span>
                   <span>requests permission to change</span>
                   <span className="font-medium text-gray-800 dark:text-white/90">
-                    Project - Nganter App
+                    Question - Further Mathematics
                   </span>
                 </span>
 
                 <span className="flex items-center gap-2 text-gray-500 text-theme-xs dark:text-gray-400">
-                  <span>Project</span>
+                  <span>Question</span>
                   <span className="w-1 h-1 bg-gray-400 rounded-full"></span>
                   <span>5 min ago</span>
                 </span>
@@ -139,12 +139,12 @@ export default function NotificationDropdown() {
                   </span>
                   <span> requests permission to change</span>
                   <span className="font-medium text-gray-800 dark:text-white/90">
-                    Project - Nganter App
+                    Question - Geography
                   </span>
                 </span>
 
                 <span className="flex items-center gap-2 text-gray-500 text-theme-xs dark:text-gray-400">
-                  <span>Project</span>
+                  <span>Question</span>
                   <span className="w-1 h-1 bg-gray-400 rounded-full"></span>
                   <span>8 min ago</span>
                 </span>
@@ -176,12 +176,12 @@ export default function NotificationDropdown() {
                   </span>
                   <span>requests permission to change</span>
                   <span className="font-medium text-gray-800 dark:text-white/90">
-                    Project - Nganter App
+                    Question - Agricultural Science
                   </span>
                 </span>
 
                 <span className="flex items-center gap-2 text-gray-500 text-theme-xs dark:text-gray-400">
-                  <span>Project</span>
+                  <span>Question</span>
                   <span className="w-1 h-1 bg-gray-400 rounded-full"></span>
                   <span>15 min ago</span>
                 </span>
@@ -213,12 +213,12 @@ export default function NotificationDropdown() {
                   </span>
                   <span> requests permission to change</span>
                   <span className="font-medium text-gray-800 dark:text-white/90">
-                    Project - Nganter App
+                    Question - Biology
                   </span>
                 </span>
 
                 <span className="flex items-center gap-2 text-gray-500 text-theme-xs dark:text-gray-400">
-                  <span>Project</span>
+                  <span>Question</span>
                   <span className="w-1 h-1 bg-gray-400 rounded-full"></span>
                   <span>1 hr ago</span>
                 </span>
@@ -249,12 +249,12 @@ export default function NotificationDropdown() {
                   </span>
                   <span>requests permission to change</span>
                   <span className="font-medium text-gray-800 dark:text-white/90">
-                    Project - Nganter App
+                    Question - Civic Education
                   </span>
                 </span>
 
                 <span className="flex items-center gap-2 text-gray-500 text-theme-xs dark:text-gray-400">
-                  <span>Project</span>
+                  <span>Question</span>
                   <span className="w-1 h-1 bg-gray-400 rounded-full"></span>
                   <span>5 min ago</span>
                 </span>
@@ -285,12 +285,12 @@ export default function NotificationDropdown() {
                   </span>
                   <span>requests permission to change</span>
                   <span className="font-medium text-gray-800 dark:text-white/90">
-                    Project - Nganter App
+                    Question - Government
                   </span>
                 </span>
 
                 <span className="flex items-center gap-2 text-gray-500 text-theme-xs dark:text-gray-400">
-                  <span>Project</span>
+                  <span>Question</span>
                   <span className="w-1 h-1 bg-gray-400 rounded-full"></span>
                   <span>8 min ago</span>
                 </span>
@@ -321,12 +321,12 @@ export default function NotificationDropdown() {
                   </span>
                   <span>requests permission to change</span>
                   <span className="font-medium text-gray-800 dark:text-white/90">
-                    Project - Nganter App
+                    Question - English
                   </span>
                 </span>
 
                 <span className="flex items-center gap-2 text-gray-500 text-theme-xs dark:text-gray-400">
-                  <span>Project</span>
+                  <span>Question</span>
                   <span className="w-1 h-1 bg-gray-400 rounded-full"></span>
                   <span>15 min ago</span>
                 </span>
@@ -358,12 +358,12 @@ export default function NotificationDropdown() {
                   </span>
                   <span>requests permission to change</span>
                   <span className="font-medium text-gray-800 dark:text-white/90">
-                    Project - Nganter App
+                    Question - Mathematics
                   </span>
                 </span>
 
                 <span className="flex items-center gap-2 text-gray-500 text-theme-xs dark:text-gray-400">
-                  <span>Project</span>
+                  <span>Question</span>
                   <span className="w-1 h-1 bg-gray-400 rounded-full"></span>
                   <span>1 hr ago</span>
                 </span>

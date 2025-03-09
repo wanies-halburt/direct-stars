@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import { useSidebar } from "../context/SidebarContext";
 import {
   // BoxCubeIcon,
-  CalenderIcon,
+  // CalenderIcon,
   ChevronDownIcon,
   GridIcon,
   HorizontaLDots,
@@ -29,14 +29,36 @@ const navItems: NavItem[] = [
   {
     icon: <GridIcon />,
     name: "Dashboard",
-    path: "/"
+    path: "/admin"
     // subItems: [{ name: "Ecommerce", path: "/", pro: false }],
   },
+  // {
+  //   icon: <CalenderIcon />,
+  //   name: "Calendar",
+  //   path: "/monthly",
+  //   // path: "/calendar",
+  // },
   {
-    icon: <CalenderIcon />,
-    name: "Calendar",
-    path: "/monthly",
-    // path: "/calendar",
+    name: "Teachers",
+    icon: <ListIcon />,
+    path: "/admin/teachers"
+    // subItems: [{ name: "Form Elements", path: "/form-elements", pro: false }],
+  },
+  // {
+  //   name: "Tables",
+  //   icon: <TableIcon />,
+  //   path: "/table"
+  //   // subItems: [{ name: "Basic Tables", path: "/basic-tables", pro: false }],
+  // },
+  {
+    name: "Classes",
+    icon: <PageIcon />,
+    path: "/admin/classes"
+  },
+  {
+    name: "Subjects",
+    icon: <TableIcon />,
+    path: "/admin/subjects"
   },
   {
     icon: <UserCircleIcon />,
@@ -45,27 +67,6 @@ const navItems: NavItem[] = [
     // path: "/profile",
   },
 
-  {
-    name: "Forms",
-    icon: <ListIcon />,
-    path: "/form"
-    // subItems: [{ name: "Form Elements", path: "/form-elements", pro: false }],
-  },
-  {
-    name: "Tables",
-    icon: <TableIcon />,
-    path: "/table"
-    // subItems: [{ name: "Basic Tables", path: "/basic-tables", pro: false }],
-  },
-  {
-    name: "Pages",
-    icon: <PageIcon />,
-    path: "/error-404"
-    // subItems: [
-    //   { name: "Blank Page", path: "/blank", pro: false },
-    //   { name: "404 Error", path: "/error-404", pro: false },
-    // ],
-  },
 ];
 
 const othersItems: NavItem[] = [
@@ -92,11 +93,10 @@ const othersItems: NavItem[] = [
   {
     icon: <PlugInIcon />,
     name: "Authentication",
-    path: "/"
-    // subItems: [
-    //   { name: "Sign In", path: "/signin", pro: false },
-    //   { name: "Sign Up", path: "/signup", pro: false },
-    // ],
+    subItems: [
+      { name: "Sign In", path: "/admin/signin", pro: false },
+      { name: "Sign Up", path: "/admin/signup", pro: false },
+    ],
   },
 ];
 

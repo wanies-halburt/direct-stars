@@ -61,9 +61,14 @@ const navItems: NavItem[] = [
     path: "/admin/subjects"
   },
   {
+    name: "Students",
+    icon: <UserCircleIcon />,
+    path: "/admin/students"
+  },
+  {
     icon: <UserCircleIcon />,
     name: "User Profile",
-    path: "/user-profile",
+    path: "/admin/profile",
     // path: "/profile",
   },
 
@@ -94,8 +99,8 @@ const othersItems: NavItem[] = [
     icon: <PlugInIcon />,
     name: "Authentication",
     subItems: [
-      { name: "Sign In", path: "/admin/signin", pro: false },
-      { name: "Sign Up", path: "/admin/signup", pro: false },
+      { name: "Sign In", path: "/signin", pro: false },
+      { name: "Sign Up", path: "/signup", pro: false },
     ],
   },
 ];

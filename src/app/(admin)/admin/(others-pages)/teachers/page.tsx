@@ -1,8 +1,8 @@
-import ComponentCard from "@/components/common/ComponentCard";
 import PageBreadcrumb from "@/components/common/PageBreadCrumb";
 import { Metadata } from "next";
 import React from "react";
 import TeachersTable from "./TeachersTable";
+import CreateTeacherForm from "./CreateTeacherForm";
 
 export const metadata: Metadata = {
   title: "Teachers | Direct Stars",
@@ -14,10 +14,9 @@ export default function Teachers() {
   return (
     <div>
       <PageBreadcrumb pageTitle="List of Teachers" />
+      <CreateTeacherForm />
       <div className="space-y-6">
-        <ComponentCard title="Teachers">
           <TeachersTable />
-        </ComponentCard>
       </div>
     </div>
   );

@@ -118,7 +118,7 @@ export default function SubjectsTable() {
                   isHeader
                   className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
                 >
-                  Status
+                  Grade
                 </TableCell>
                 <TableCell
                   isHeader

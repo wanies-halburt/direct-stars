@@ -1,4 +1,5 @@
 import React, { FC } from "react";
+import { type UseFormRegisterReturn } from 'react-hook-form';
 
 interface InputProps {
   type?: "text" | "number" | "email" | "password" | "date" | "time" | string;
@@ -6,6 +7,7 @@ interface InputProps {
   name?: string;
   placeholder?: string;
   defaultValue?: string | number;
+  register?: UseFormRegisterReturn;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   className?: string;
   min?: string;
@@ -23,6 +25,7 @@ const Input: FC<InputProps> = ({
   name,
   placeholder,
   defaultValue,
+  register,
   onChange,
   className = "",
   min,
@@ -53,6 +56,7 @@ const Input: FC<InputProps> = ({
         type={type}
         id={id}
         name={name}
+        {...register}
         placeholder={placeholder}
         defaultValue={defaultValue}
         onChange={onChange}

@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import {
   Table,
   TableBody,
@@ -8,6 +10,7 @@ import {
 } from "../../../../../components/ui/table";
 
 import Image from "next/image";
+import Pagination from "@/components/tables/Pagination";
 
 interface Order {
   id: number;
@@ -87,9 +90,10 @@ const tableData: Order[] = [
 ];
 
 export default function TeachersTable() {
+  const [currentPage, setCurrentPage] = useState(1);
   return (
     <div className="overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-white/[0.05] dark:bg-white/[0.03]">
-      <div className="max-w-full overflow-x-auto">
+      <div className="max-w-full overflow-x-auto items-center justify-center justify-items-center">
         <div className="min-w-[1102px]">
           <Table>
             {/* Table Header */}
@@ -109,15 +113,15 @@ export default function TeachersTable() {
                 </TableCell>
                 <TableCell
                   isHeader
-                  className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
+                  className="px-5 py-3 font-medium text-gray-500 text-center text-theme-xs dark:text-gray-400"
                 >
-                  Role
+                  Average score of students
                 </TableCell>
                 <TableCell
                   isHeader
-                  className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
+                  className="px-5 py-3 font-medium text-gray-500 text-center text-theme-xs dark:text-gray-400"
                 >
-                  No of Classes
+                  No of Classes assigned
                 </TableCell>
               </TableRow>
             </TableHeader>
@@ -149,16 +153,19 @@ export default function TeachersTable() {
                   <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
                     {order.teacher.role}
                   </TableCell>
-                  <TableCell className="px-4 py-3 text-gray-500 text-theme-sm dark:text-gray-400">
+                  <TableCell className="px-4 py-3 text-gray-500 text-center text-theme-sm dark:text-gray-400">
                     {order.average}
                   </TableCell>
-                  <TableCell className="px-4 py-3 text-gray-500 text-theme-sm dark:text-gray-400">
+                  <TableCell className="px-4 py-3 text-gray-500 text-center text-theme-sm dark:text-gray-400">
                     {order.noOfClasses}
                   </TableCell>
                 </TableRow>
               ))}
             </TableBody>
           </Table>
+        </div>
+        <div className="w-full flex items-center justify-center justify-items-center py-5">
+          <Pagination currentPage={currentPage} totalPages={12} onPageChange={(e) => setCurrentPage(e)} />
         </div>
       </div>
     </div>

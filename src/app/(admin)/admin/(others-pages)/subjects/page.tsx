@@ -1,8 +1,8 @@
-import ComponentCard from "@/components/common/ComponentCard";
 import PageBreadcrumb from "@/components/common/PageBreadCrumb";
 import { Metadata } from "next";
 import React from "react";
 import SubjectsTable from "./SubjectsTable";
+import CreateSubjectForm from "./CreateSubjectForm";
 
 export const metadata: Metadata = {
   title: "Subjects | Direct Stars",
@@ -14,10 +14,9 @@ export default function Subjects() {
   return (
     <div>
       <PageBreadcrumb pageTitle="List of Subjects" />
+      <CreateSubjectForm />
       <div className="space-y-6">
-        <ComponentCard title="Subjects">
             <SubjectsTable />
-        </ComponentCard>
       </div>
     </div>
   );

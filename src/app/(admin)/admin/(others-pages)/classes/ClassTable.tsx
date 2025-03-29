@@ -12,6 +12,7 @@ import {
 import Badge from "../../../../../components/ui/badge/Badge";
 import Image from "next/image";
 import Pagination from "@/components/tables/Pagination";
+import Link from "next/link";
 
 interface Order {
   id: number;
@@ -147,14 +148,14 @@ export default function ClassesTable() {
                           alt={order.user.name}
                         />
                       </div>
-                      <div>
+                      <Link href={`/admin/classes/${order.class}`}>
                         <span className="block font-medium text-gray-800 text-theme-sm dark:text-white/90">
                           {order.user.name}
                         </span>
                         <span className="block text-gray-500 text-theme-xs dark:text-gray-400">
                           {order.user.role}
                         </span>
-                      </div>
+                      </Link>
                     </div>
                   </TableCell>
                   <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">

@@ -597,3 +597,104 @@ layer(base);
   opacity: 0.8;
   cursor: grabbing; /* Changes the cursor to indicate dragging */
 }
+
+.mep_editor {
+  &_wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+    &.error_state {
+      .mep_editor {
+        &_label,
+        &_errormsg {
+          color: #e22034;
+        }
+
+        &_contain {
+          border: 1px solid #f6bac0;
+
+          &:has(input.default_input:focus) {
+            border: 1px solid #e84d5d;
+            box-shadow: 0px 0px 0px 4px #fff4ed;
+          }
+        }
+      }
+    }
+  }
+
+  &_label,
+  &_errormsg {
+    display: block;
+    color: #4c5361;
+  }
+  &_label {
+    margin-bottom: 0.6rem;
+  }
+  &_errormsg {
+    margin-top: 0.6rem;
+  }
+
+  &_contain {
+    display: flex;
+    align-items: center;
+    column-gap: 0.8rem;
+    border-radius: 0.8rem;
+    border: 1px solid #edeeef;
+    background: #ffffff;
+    transition: all 0.3s linear;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    & > .mep_ai_generate_cta {
+      width: 3rem !important;
+      height: 3rem !important;
+      padding: 0 !important;
+      position: absolute;
+      top: 0.4rem;
+      right: 0.8rem;
+    }
+    & > .quill {
+      width: 100%;
+    }
+    & .ql-toolbar.ql-snow {
+      border: none;
+      border-bottom: 1px solid #edeeef;
+    }
+    &.with_ai .ql-toolbar.ql-snow {
+      width: calc(100% - 3rem);
+    }
+    & .ql-container {
+      border: none !important;
+    }
+    .ql-editor {
+      background: transparent;
+      color: #2a2e35;
+      line-height: 20px;
+      transition: all 0.3s linear;
+      width: 100%;
+      height: 100%;
+
+      &:focus {
+        caret-color: #2a2e35;
+      }
+      &::placeholder {
+        color: #878c95;
+      }
+      &:disabled {
+        cursor: not-allowed;
+      }
+    }
+    &:has(.ql-editor:focus) {
+      border: 1px solid #4a3041;
+      box-shadow: 0px 0px 0px 4px rgba(166, 115, 148, 0.1);
+    }
+    &:has(.ql-container.ql-disabled) {
+      border: 1px solid #878c95;
+      & .ql-editor {
+        background: #c8cace;
+        border-radius: 0 0 0.8rem 0.8rem;
+      }
+    }
+  }
+}

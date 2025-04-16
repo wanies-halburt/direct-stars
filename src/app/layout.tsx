@@ -9,35 +9,35 @@ const outfit = Outfit({
   variable: "--font-outfit-sans",
   subsets: ["latin"],
 });
-export const toastOptions = {
-  className: "z-40",
-  success: {
-    iconTheme: {
-      primary: "white",
-      secondary: "green",
-    },
-    style: {
-      background: "green",
-      color: "white",
-    },
-  },
-  error: {
-    iconTheme: {
-      primary: "white",
-      secondary: "red",
-    },
-    style: {
-      background: "red",
-      color: "white",
-    },
-  },
-};
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const toastOptions = {
+    className: "z-40",
+    success: {
+      iconTheme: {
+        primary: "white",
+        secondary: "green",
+      },
+      style: {
+        background: "green",
+        color: "white",
+      },
+    },
+    error: {
+      iconTheme: {
+        primary: "white",
+        secondary: "red",
+      },
+      style: {
+        background: "red",
+        color: "white",
+      },
+    },
+  };
   return (
     <html lang="en">
       <body className={`${outfit.variable} dark:bg-gray-900`}>

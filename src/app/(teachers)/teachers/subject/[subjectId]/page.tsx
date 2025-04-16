@@ -1,13 +1,17 @@
 "use client"
 
-import { Editor } from '@/components/Editor';
 import Input from '@/components/form/input/InputField';
 import Select from '@/components/form/Select';
 import Button from '@/components/ui/button/Button';
 import { Modal } from '@/components/ui/modal';
 import { useModal } from '@/hooks/useModal';
-import {useRef, useState} from 'react'
-import  ReactQuill from 'react-quill-new';
+import { IDomEditor } from '@wangeditor-next/editor';
+import dynamic from 'next/dynamic';
+import {useState} from 'react'
+
+const WangEditor = dynamic(() => import("@/components/WYSIWYGEditor"), {
+  ssr: false,
+});
 
 interface Question {
   question: string;
@@ -29,8 +33,8 @@ const correctAnswerOptions = [
 
 const CreateQuestion = () => {
     const { isOpen, openModal, closeModal } = useModal();
-    const quillRef = useRef<ReactQuill>(null);
   const [question, setQuestion] = useState('');
+  const [editorState, setEditorState] = useState<IDomEditor | null>(null);
   const [options, setOptions] = useState({
     a: '',
     b: '',
@@ -40,9 +44,9 @@ const CreateQuestion = () => {
   const [correctOption, setCorrectOption] = useState<'a' | 'b' | 'c' | 'd' | undefined>(undefined);
   const [questions, setQuestions] = useState<Question[]>([]);
 
-  const handleQuestionChange = (e: string) => {
-    setQuestion(e);
-  };
+  // const handleQuestionChange = (e: string) => {
+  //   setQuestion(e);
+  // };
 
   const handleOptionChange = (e: React.ChangeEvent<HTMLInputElement>, option: 'a' | 'b' | 'c' | 'd') => {
     setOptions((prevOptions) => ({ ...prevOptions, [option]: e.target.value }));
@@ -83,15 +87,11 @@ const CreateQuestion = () => {
                 onClose={closeModal}
         className="max-w-[700px] p-6 lg:p-10">
       <form onSubmit={handleSubmit} className="flex flex-col gap-3 mt-5">
-          <Editor 
-          editorLabel="Question"
-          value={question}   
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          // @ts-expect-error
-            ref={quillRef}       
-           placeholder='Enter Question here'  
-           onEditorChange={handleQuestionChange} 
-           />
+      <WangEditor
+                        editorState={editorState}
+                        setEditorState={setEditorState}
+                      
+                      />
         <h2 className="mb-2">Options:</h2>
         <div className="flex flex-col mb-2">
           <label className="mb-1">

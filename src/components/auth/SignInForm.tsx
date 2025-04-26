@@ -6,10 +6,37 @@ import Button from "@/components/ui/button/Button";
 import { ChevronLeftIcon, EyeCloseIcon, EyeIcon } from "@/icons";
 import Link from "next/link";
 import React, { useState } from "react";
+import { yupResolver } from "@hookform/resolvers/yup";
+import {useAdminAuthStore} from "@/store/AdminAuthStore";
+import { useForm } from "react-hook-form";
+import * as yup from "yup";
+import { useRouter } from "next/navigation";
+
+const loginSchema = yup.object({
+  email: yup.string().email().required(" Email is required"),
+  password: yup.string().required("Password is required"),
+});
+type LoginType = yup.InferType<typeof loginSchema>;
 
 export default function SignInForm() {
+  const {login, loading} = useAdminAuthStore()
+  const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
+  const {
+    register,
+    reset,
+    handleSubmit,
+  } = useForm({ resolver: yupResolver(loginSchema) });
+  
+  const onSubmit = async (formValues: LoginType) => {
+    const response = await login(formValues);
+    console.log("response", response);
+    if (response) {
+      reset();
+      router.push("/admin");
+    }
+  };
   return (
     <div className="flex flex-col flex-1 lg:w-1/2 w-full">
       <div className="w-full max-w-md sm:pt-10 mx-auto mb-5">
@@ -18,7 +45,7 @@ export default function SignInForm() {
           className="inline-flex items-center text-sm text-gray-500 transition-colors hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
         >
           <ChevronLeftIcon />
-          Back to dashboard
+          Back to Home
         </Link>
       </div>
       <div className="flex flex-col justify-center flex-1 w-full max-w-md mx-auto">
@@ -32,7 +59,7 @@ export default function SignInForm() {
             </p>
           </div>
           <div>
-            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-5">
+            {/* <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-5">
               <button className="inline-flex items-center justify-center gap-3 py-3 text-sm font-normal text-gray-700 transition-colors bg-gray-100 rounded-lg px-7 hover:bg-gray-200 hover:text-gray-800 dark:bg-white/5 dark:text-white/90 dark:hover:bg-white/10">
                 <svg
                   width="20"
@@ -73,8 +100,8 @@ export default function SignInForm() {
                 </svg>
                 Sign in with X
               </button>
-            </div>
-            <div className="relative py-3 sm:py-5">
+            </div> */}
+            {/* <div className="relative py-3 sm:py-5">
               <div className="absolute inset-0 flex items-center">
                 <div className="w-full border-t border-gray-200 dark:border-gray-800"></div>
               </div>
@@ -83,14 +110,16 @@ export default function SignInForm() {
                   Or
                 </span>
               </div>
-            </div>
-            <form>
+            </div> */}
+            <form                 onSubmit={handleSubmit(onSubmit)}>
               <div className="space-y-6">
                 <div>
                   <Label>
                     Email <span className="text-error-500">*</span>{" "}
                   </Label>
-                  <Input placeholder="info@gmail.com" type="email" />
+                  <Input placeholder="info@gmail.com" type="email"
+    
+                    register={register("email")}/>
                 </div>
                 <div>
                   <Label>
@@ -99,6 +128,8 @@ export default function SignInForm() {
                   <div className="relative">
                     <Input
                       type={showPassword ? "text" : "password"}
+                      register={register("password")}
+
                       placeholder="Enter your password"
                     />
                     <span
@@ -128,14 +159,14 @@ export default function SignInForm() {
                   </Link>
                 </div>
                 <div>
-                  <Button className="w-full" size="sm">
+                  <Button className="w-full" size="sm" disabled={loading}>
                     Sign in
                   </Button>
                 </div>
               </div>
             </form>
 
-            <div className="mt-5">
+            {/* <div className="mt-5">
               <p className="text-sm font-normal text-center text-gray-700 dark:text-gray-400 sm:text-start">
                 Don&apos;t have an account? {""}
                 <Link
@@ -145,7 +176,7 @@ export default function SignInForm() {
                   Sign Up
                 </Link>
               </p>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

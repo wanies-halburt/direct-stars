@@ -70,10 +70,11 @@ PublicSchema.methods.generateAuthToken = async function () {
   const token = jwt.sign(
     {
       _id: user._id,
-      fullName: user.firstname,
+      firstName: user.firstname,
+      lastName: user.lastname,
       email: user.email,
     },
-    "secret",
+    "public_secret",
     options
   );
   user.tokens = user.tokens.concat({ token });
@@ -86,7 +87,7 @@ PublicSchema.methods.generateAuthToken = async function () {
 };
 
 PublicSchema.statics.findByCredentials = async (email, password) => {
-  const user = await Client.findOne({ email });
+  const user = await Public.findOne({ email });
 
   if (!user) {
     return false;

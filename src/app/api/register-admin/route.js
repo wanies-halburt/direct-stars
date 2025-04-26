@@ -11,6 +11,14 @@ connectMongoDB();
 
 export async function POST(req) {
     try {
+      const token = req.headers.get("authorization");
+      if (!token) {
+        return throwUserResponse({
+          status: 401,
+          success: false,
+          message: "Unauthorized",
+        });
+      }    
         const reqBody = await req.json();
 
         const password = generatePasswords(10, {
@@ -97,10 +105,9 @@ export async function POST(req) {
           userWithoutPassword = {
             _id: loggedResteredUser._id,
             id: loggedResteredUser._id,
-            fullName: loggedResteredUser.fullName,
+            firstName: loggedResteredUser.firstname,
+            lastName: loggedResteredUser.lastname,
             email: loggedResteredUser.email,
-            userName: loggedResteredUser.userName,
-            isVerified: loggedResteredUser.isVerified,
           };
           return throwUserResponse({
             status: 200,

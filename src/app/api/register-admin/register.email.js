@@ -18,7 +18,7 @@ export const registerAdminAutoRespEmailBody = ({ firstname, password }) => {
     {
       variable: "PASSWORD_LINK",
       value:
-        `${process.env.BASE_SITE_URL}/signin` ??
+        `${process.env.BASE_SITE_URL}admin-login` ??
         "http://localhost:3000/signin",
     },
   ];

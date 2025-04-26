@@ -3,13 +3,12 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useCallback } from 'react';
 import { useForm } from 'react-hook-form';
-import axios from "axios";
-import toast from "react-hot-toast";
 import Input from '@/components/form/input/InputField';
 import Button from '@/components/ui/button/Button'
 import { Modal } from '@/components/ui/modal';
 import { useModal } from '@/hooks/useModal';
 import { type CreateAdminPayload, CreateAdminSchema } from './Admin.helpers';
+import {useAdminAuthStore} from "@/store/AdminAuthStore";
 import { EnvelopeIcon } from '@/icons';
 import Select from '@/components/form/Select';
 
@@ -19,11 +18,13 @@ const optionsRoles = [
 ];
 
 const CreateAdminForm = () => {
+    const {addNewAdmin, loading} = useAdminAuthStore()
   const { isOpen, openModal, closeModal } = useModal();
   const {
 		handleSubmit,
 		setValue,
 		register,
+    reset,
 		// clearErrors,
 		formState: { errors },
 	} = useForm({
@@ -32,13 +33,18 @@ const CreateAdminForm = () => {
 
 	const onSubmit = useCallback(
 		async (payload: CreateAdminPayload) => {
-      console.log("payload", payload);
-      const res = await axios.post(`/api/register-admin`, payload);
-      console.log("response", res)
-      toast.success(res.data?.message || "User has been added");
-      closeModal();
+      try {
+        const response = await addNewAdmin(payload);
+        console.log("response", response);
+        if (response) {
+          reset();
+          closeModal();
+        }
+      } catch (error) {
+        console.error(error);
+      }
 		},
-		[ closeModal]
+		[addNewAdmin, closeModal, reset]
 	);
 
   const handleSelectRole = (value: string) => {
@@ -84,7 +90,7 @@ const CreateAdminForm = () => {
               defaultValue=""
               className="bg-gray-50 dark:bg-gray-800"
             />
-               <Button>Submit</Button>
+               <Button disabled={loading}>Submit</Button>
           </form>
         </Modal>
     </div>

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   Table,
   TableBody,
@@ -11,38 +11,12 @@ import {
 
 import Image from "next/image";
 import Pagination from "@/components/tables/Pagination";
-import axios from "axios";
-
-interface Order {
-  _id: number;
-  firstName: string;
-  lastName: string;
-  email: string;
-  role: string;
-  phone: string;
-}
-
-// Define the table data using the interface
+import { useAdminAuthStore } from "@/store/AdminAuthStore";
 
 export default function AdminTable() {
+  const members = useAdminAuthStore((state) => state.members);  
   const [currentPage, setCurrentPage] = useState(1);
-  const [users, setUsers] = useState<Order[]>([])
-//   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    async function fetchProducts() {
-        try {
-          const response = await axios.get("/api/get-all-admin");
-          setUsers(response.data?.data);
-        } catch (error) {
-          console.error("Error fetching Admin users:", error);
-          // You can also display an error message to the user here
-        } finally {
-        //   setIsLoading(false);
-        }
-      }
-      fetchProducts();
-  }, [])
   return (
     <div className="overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-white/[0.05] dark:bg-white/[0.03]">
       <div className="max-w-full overflow-x-auto items-center justify-center justify-items-center">
@@ -80,7 +54,7 @@ export default function AdminTable() {
 
             {/* Table Body */}
             <TableBody className="divide-y divide-gray-100 dark:divide-white/[0.05]">
-              {users.map((user) => (
+              {members.map((user) => (
                 <TableRow key={user._id}>
                   <TableCell className="px-5 py-4 sm:px-6 text-start">
                     <div className="flex items-center gap-3">

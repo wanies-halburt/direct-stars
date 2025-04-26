@@ -71,10 +71,11 @@ AdminSchema.methods.generateAuthToken = async function () {
   const token = jwt.sign(
     {
       _id: user._id,
-      fullName: user.firstname,
+      firstName: user.firstname,
+      lastName: user.lastname,
       email: user.email,
     },
-    "secret",
+    "admin_secret",
     options
   );
   user.tokens = user.tokens.concat({ token });
@@ -87,7 +88,7 @@ AdminSchema.methods.generateAuthToken = async function () {
 };
 
 AdminSchema.statics.findByCredentials = async (email, password) => {
-  const user = await Client.findOne({ email });
+  const user = await Admin.findOne({ email });
 
   if (!user) {
     return false;

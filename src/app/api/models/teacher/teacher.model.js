@@ -75,10 +75,11 @@ TeacherSchema.methods.generateAuthToken = async function () {
   const token = jwt.sign(
     {
       _id: user._id,
-      fullName: user.firstname,
+      firstName: user.firstname,
+      lastName: user.lastname,
       email: user.email,
     },
-    "secret",
+    "teacher_secret",
     options
   );
   user.tokens = user.tokens.concat({ token });
@@ -91,7 +92,7 @@ TeacherSchema.methods.generateAuthToken = async function () {
 };
 
 TeacherSchema.statics.findByCredentials = async (email, password) => {
-  const user = await Client.findOne({ email });
+  const user = await Teacher.findOne({ email });
 
   if (!user) {
     return false;

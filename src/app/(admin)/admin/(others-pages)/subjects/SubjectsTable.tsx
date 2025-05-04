@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import React, { useEffect } from "react";
 import {
   Table,
   TableBody,
@@ -7,87 +9,15 @@ import {
   TableRow,
 } from "../../../../../components/ui/table";
 
-import Badge from "../../../../../components/ui/badge/Badge";
+// import Badge from "../../../../../components/ui/badge/Badge";
 import Image from "next/image";
-
-interface Order {
-  id: number;
-  user: {
-    image: string;
-    name: string;
-    role: string;
-  };
-  class: string;
-  average: number;
-  status: string;
-  noOfClasses: string;
-}
-
-// Define the table data using the interface
-const tableData: Order[] = [
-  {
-    id: 1,
-    user: {
-      image: "/images/user/user-17.jpg",
-      name: "Lindsey Curtis",
-      role: "Mathematics",
-    },
-    class: "SS2",
-    average: 71,
-    noOfClasses: "9",
-    status: "B",
-  },
-  {
-    id: 2,
-    user: {
-      image: "/images/user/user-18.jpg",
-      name: "Kaiya George",
-      role: "Physics",
-    },
-    class: "SS1",
-    average: 81,
-    noOfClasses: "3",
-    status: "A",
-  },
-  {
-    id: 3,
-    user: {
-      image: "/images/user/user-17.jpg",
-      name: "Zain Geidt",
-      role: "English Language",
-    },
-    class: "JSS3",
-    average: 61,
-    noOfClasses: "180",
-    status: "B",
-  },
-  {
-    id: 4,
-    user: {
-      image: "/images/user/user-20.jpg",
-      name: "Abram Schleifer",
-      role: "Civic Education",
-    },
-    class: "JSS2",
-    average: 65,
-    noOfClasses: "5",
-    status: "B",
-  },
-  {
-    id: 5,
-    user: {
-      image: "/images/user/user-21.jpg",
-      name: "Carla George",
-      role: "Accounting",
-    },
-    class: "SS3",
-    average: 51,
-    noOfClasses: "3",
-    status: "C",
-  },
-];
+import { useAdminAuthStore } from "@/store/AdminAuthStore";
 
 export default function SubjectsTable() {
+  const { subjects, getAllSubjects } = useAdminAuthStore();
+  useEffect(() => {
+    getAllSubjects();
+  }, []);
   return (
     <div className="overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-white/[0.05] dark:bg-white/[0.03]">
       <div className="max-w-full overflow-x-auto">
@@ -131,21 +61,21 @@ export default function SubjectsTable() {
 
             {/* Table Body */}
             <TableBody className="divide-y divide-gray-100 dark:divide-white/[0.05]">
-              {tableData.map((order) => (
-                <TableRow key={order.id}>
+              {subjects.map((order) => (
+                <TableRow key={order._id}>
                   <TableCell className="px-5 py-4 sm:px-6 text-start">
                     <div className="flex items-center gap-3">
                       <div className="w-10 h-10 overflow-hidden rounded-full">
                         <Image
                           width={40}
                           height={40}
-                          src={order.user.image}
-                          alt={order.user.name}
+                          src="/images/user/user-17.jpg"
+                          alt={order.title}
                         />
                       </div>
                       <div>
                         <span className="block font-medium text-gray-800 text-theme-sm dark:text-white/90">
-                          {order.user.name}
+                          {order.createdBy.firstName}
                         </span>
                         {/* <span className="block text-gray-500 text-theme-xs dark:text-gray-400">
                           {order.user.role}
@@ -154,13 +84,13 @@ export default function SubjectsTable() {
                     </div>
                   </TableCell>
                   <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                    {order.user.role}
+                    {order.title}
                   </TableCell>
                   <TableCell className="px-4 py-3 text-gray-500 text-theme-sm dark:text-gray-400">
-                    {order.average}
+                    Null
                   </TableCell>
                   <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                    <Badge
+                    {/* <Badge
                       size="sm"
                       color={
                         order.status === "A"
@@ -171,10 +101,11 @@ export default function SubjectsTable() {
                       }
                     >
                       {order.status}
-                    </Badge>
+                    </Badge> */}
+                    A
                   </TableCell>
                   <TableCell className="px-4 py-3 text-gray-500 text-theme-sm dark:text-gray-400">
-                    {order.noOfClasses}
+                    {/* {order.noOfClasses} */}0
                   </TableCell>
                 </TableRow>
               ))}

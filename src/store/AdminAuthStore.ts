@@ -1,9 +1,10 @@
-import { type AdminUser } from './../types/Admin';
+import { type AdminUser, SubjectProps } from './../types/Admin';
 import axios from "axios";
 import Cookies from "js-cookie";
 import { create } from "zustand";
 import toast from "react-hot-toast";
 import { CreateAdminPayload } from '@/app/(admin)/admin/(others-pages)/members/Admin.helpers';
+import { CreateSubjectPayload } from '@/app/(admin)/admin/(others-pages)/subjects/Subject.helpers';
 
 interface AdminAuthState {
   user: AdminUser | null;
@@ -11,15 +12,18 @@ interface AdminAuthState {
   token: string | null;
   loading: boolean;
   error: string | null;
+  subjects: SubjectProps[];
   
   // Methods
   addNewAdmin: (payload: CreateAdminPayload) => Promise<boolean>;
   getAllAdmins: () => Promise<void>;
+  getAllSubjects: () => Promise<void>;
   login: (credentials: { email: string; password: string }) => Promise<boolean>;
   loadFromStorage: () => void;
   logout: () => void;
   setAdminUserData: (data: AdminUser) => void;
   getAdminUserProfile: () => Promise<AdminUser | undefined>;
+  createSubject: (payload: CreateSubjectPayload) => Promise<boolean>;
 }
 
 
@@ -34,6 +38,7 @@ export const useAdminAuthStore = create<AdminAuthState>((set) => ({
   token: null,
   loading: false,
   error: null,
+  subjects: [],
 
   // Register API
   addNewAdmin: async ({ email, role, phone, firstName, lastName }: CreateAdminPayload) => {
@@ -79,7 +84,43 @@ export const useAdminAuthStore = create<AdminAuthState>((set) => ({
       });
     }
   },
-
+  createSubject: async (subjectData: CreateSubjectPayload) => {
+    set({ loading: true, error: null });
+    try {
+      const res = await axios.post(`/api/add-subject`, subjectData, getAuthHeader());
+      const store = useAdminAuthStore.getState() as { getAllSubjects: () => Promise<void> };
+      await store.getAllSubjects();
+      set({
+        loading: false,
+      });
+      toast.success(
+        res?.data?.message ??
+          "Subject has been added"
+      );
+      return true;
+    } catch (err: Error | unknown) {
+      const error = err as { response?: { data?: { message?: string } } };
+      toast.error(error.response?.data?.message ?? "Failed to register user");
+      set({
+        error: error.response?.data?.message || "Registration failed",
+        loading: false,
+      });
+      return false;
+    }
+  },
+  getAllSubjects: async () => {
+    set({ loading: true, error: null });
+    try {
+      const res = await axios.get("/api/fetch-subjects", getAuthHeader());
+      set({ subjects: res?.data?.data, loading: false });
+    } catch (err: Error | unknown) {
+      const error = err as { response?: { data?: { message?: string } } };
+      set({
+        error: error.response?.data?.message || "Failed to fetch all subjects list",
+        loading: false,
+      });
+    }
+  },
   // Login API
   login: async ({ email, password }: {email: string, password: string}) => {
     set({ loading: true, error: null });

@@ -1,9 +1,10 @@
 import * as yup from 'yup';
 
 export const CreateSubjectSchema = yup.object({
-    name: yup.string().required(),
-    code: yup.string(),
+    title: yup.string().required(),
+    code: yup.string().required(),
     description: yup.string().required(),
+    createdBy: yup.string().required(),
 });
 
-export type CreateClassPayload = yup.InferType<typeof CreateSubjectSchema>;
+export type CreateSubjectPayload = yup.InferType<typeof CreateSubjectSchema>;
